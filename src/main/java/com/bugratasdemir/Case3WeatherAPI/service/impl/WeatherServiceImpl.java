@@ -8,6 +8,7 @@ import com.bugratasdemir.Case3WeatherAPI.general.BaseEntityService;
 import com.bugratasdemir.Case3WeatherAPI.mapper.WeatherMapper;
 import com.bugratasdemir.Case3WeatherAPI.repository.CityRepository;
 import com.bugratasdemir.Case3WeatherAPI.service.WeatherService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,10 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class WeatherServiceImpl extends BaseEntityService<City, CityRepository> implements WeatherService {
 
-    private String apiKey = "d0697d1f2d2e44969ae222121240303";
-
-    //https://www.weatherapi.com/api-explorer.aspx
-    //https://www.weatherapi.com/api-explorer.aspx
+    @Value("${apiKey}")
+    private String apiKey;
 
     protected WeatherServiceImpl(CityRepository repository, WeatherApi weatherApi) {
         super(repository);
